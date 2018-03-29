@@ -17,6 +17,9 @@ target 'RNChat' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  # Required by RNFirebase
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
 end
 
 post_install do |installer|

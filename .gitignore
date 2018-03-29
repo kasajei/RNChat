@@ -56,3 +56,4 @@ buck-out/
 #
 .env
 /ios/Pods
+/ios/RNChat/GoogleService-Info.plist
