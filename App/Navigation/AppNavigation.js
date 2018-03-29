@@ -7,13 +7,25 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Colors }  from '../Themes'
 
 // Manifest of possible screens
+
+const ChatNav = StackNavigator({
+  ChatListScreen: { screen: ChatListScreen }
+},{
+  initialRouteName: 'ChatListScreen',
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: styles.header,
+    headerTintColor: Colors.snow,
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  }),
+})
+
 const PrimaryNav = TabNavigator({
   LaunchScreen: { screen: LaunchScreen },
-  ChatListScreen: { screen: ChatListScreen }
-  
+  ChatNav: { screen: ChatNav }
 }, {
   // Default config for all screens
-  headerMode: 'none',
   initialRouteName: 'LaunchScreen',
   navigationOptions: ({ navigation }) => ({
     headerStyle: styles.header,
@@ -22,7 +34,7 @@ const PrimaryNav = TabNavigator({
       let iconName;
       if (routeName === 'LaunchScreen') {
         iconName = 'home';
-      } else if (routeName === 'ChatListScreen') {
+      } else if (routeName === 'ChatNav') {
         iconName = 'comment';
       }
       return <FontAwesome name={iconName} size={25} color={tintColor} />;
