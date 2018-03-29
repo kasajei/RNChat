@@ -1,17 +1,21 @@
-import { takeLatest, all } from 'redux-saga/effects'
+import { takeLatest, all, call } from 'redux-saga/effects'
 import API from '../Services/Api'
 import FixtureAPI from '../Services/FixtureApi'
 import DebugConfig from '../Config/DebugConfig'
+import firebase from 'react-native-firebase'
 
 /* ------------- Types ------------- */
 
 import { StartupTypes } from '../Redux/StartupRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
+import { UserTypes } from '../Redux/UserRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
+import {signIn, logout} from './UserSagas'
+import {updateProfile, uploadProfilePhoto} from './UserSagas'
 
 /* ------------- API ------------- */
 
@@ -23,10 +27,11 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 
 export default function * root () {
   yield all([
-    // some sagas only receive an action
-    takeLatest(StartupTypes.STARTUP, startup),
+    call(firebase.auth), // Why dose this need?
+    takeLatest(UserTypes.SIGN_IN, signIn),
+    takeLatest(UserTypes.LOGOUT, logout),
+    takeLatest(UserTypes.UPDATE_PROFILE, updateProfile),
+    takeLatest(UserTypes.UPLOAD_PROFILE_PHOTO, uploadProfilePhoto),
 
-    // some sagas receive extra parameters in addition to an action
-    takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)
   ])
 }

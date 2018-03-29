@@ -20,7 +20,7 @@ const ApplicationStyles = {
     },
     container: {
       flex: 1,
-      paddingTop: Metrics.baseMargin,
+      paddingTop: Metrics.doubleSection,
       backgroundColor: Colors.background
     },
     section: {
