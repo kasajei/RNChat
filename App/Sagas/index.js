@@ -14,7 +14,7 @@ import { startup } from './StartupSagas'
 import { getUserAvatar } from './GithubSagas'
 import { signIn, logout } from './UserSagas'
 import { updateProfile, uploadProfilePhoto } from './UserSagas'
-import { chatListLoad, chatCreate } from './ChatSagas'
+import { chatListLoad, chatCreate, messageListLoad, messageCreate } from './ChatSagas'
 
 /* ------------- API ------------- */
 
@@ -34,5 +34,7 @@ export default function * root () {
 
     takeLatest(ChatTypes.CHAT_LIST_LOAD, chatListLoad),
     takeLatest(ChatTypes.CHAT_CREATE, chatCreate),
+    takeLatest(ChatTypes.MESSAGE_LIST_LOAD, messageListLoad),
+    takeLatest(ChatTypes.MESSAGE_CREATE, messageCreate),
   ])
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
+import ChatMessageScreen from '../Containers/ChatMessageScreen'
 import ChatListScreen from '../Containers/ChatListScreen'
 import LaunchScreen from '../Containers/LaunchScreen'
 import styles from './Styles/NavigationStyles'
@@ -9,7 +10,8 @@ import { Colors }  from '../Themes'
 // Manifest of possible screens
 
 const ChatNav = StackNavigator({
-  ChatListScreen: { screen: ChatListScreen }
+  ChatListScreen: { screen: ChatListScreen },
+  ChatMessageScreen: { screen: ChatMessageScreen },
 },{
   initialRouteName: 'ChatListScreen',
   navigationOptions: ({ navigation }) => ({
@@ -22,6 +24,7 @@ const ChatNav = StackNavigator({
 })
 
 const PrimaryNav = TabNavigator({
+  
   LaunchScreen: { screen: LaunchScreen },
   ChatNav: { screen: ChatNav }
 }, {

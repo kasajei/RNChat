@@ -5,7 +5,6 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   row: {
     flex: 1,
-    backgroundColor: Colors.fire,
     marginVertical: Metrics.smallMargin,
     justifyContent: 'center'
   },
@@ -20,7 +19,4 @@ export default StyleSheet.create({
     textAlign: 'center',
     color: Colors.snow
   },
-  listContent: {
-    marginTop: Metrics.baseMargin
-  }
 })

@@ -23,6 +23,10 @@ const ApplicationStyles = {
       paddingTop: Metrics.doubleSection,
       backgroundColor: Colors.background
     },
+    listContainer: {
+      flex: 1,
+      backgroundColor: Colors.background
+    },
     section: {
       margin: Metrics.section,
       padding: Metrics.baseMargin

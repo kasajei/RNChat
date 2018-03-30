@@ -34,8 +34,19 @@ class ChatListScreen extends React.PureComponent {
   renderRow ({item}) {
     return (
       <View style={styles.row}>
-        <Text style={styles.boldLabel}>{item.title}</Text>
-        <Text style={styles.label}>{item.createdAt.toString()}</Text>
+        <Text style={styles.boldLabel}>{item.title}@{item.createdAt.toString()}</Text>
+        <Button 
+          title="Chat Start"
+          buttonStyle={{
+            backgroundColor:Colors.transparent
+          }}
+          icon={<Icon name='comment' type="font-awesome" color={Colors.fire}/>}
+          onPress={
+            ()=>{
+              this.props.navigation.navigate("ChatMessageScreen", {chatId: item.id})
+            }
+          }
+        />
       </View>
     )
   }
@@ -47,11 +58,10 @@ class ChatListScreen extends React.PureComponent {
   render () {
     return (
       <View style={styles.mainContainer}>
-        <View style={styles.container}>
+        <View style={styles.listContainer}>
           <FlatList
-            contentContainerStyle={styles.listContent}
             data={this.props.chatList}
-            renderItem={this.renderRow}
+            renderItem={this.renderRow.bind(this)}
             keyExtractor={this.keyExtractor}
             initialNumToRender={this.oneScreensWorth}
           />

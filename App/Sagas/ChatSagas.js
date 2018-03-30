@@ -43,3 +43,30 @@ export function * chatCreate (action) {
   const newChat = Object.assign(doc.data(),{id:doc.id})
   yield put(ChatActions.chatListMerge([newChat]))
 }
+
+export function * messageListLoad (action){
+  const { chatId } =  action
+  const collection = firebase.firestore().collection(chatCollection).doc(chatId)
+    .collection(messageCollection).orderBy("createdAt", "desc")
+  const querySnap = yield call([collection, collection.get])
+  const messageList = querySnap.docs.map(doc=>{
+    return Object.assign(doc.data(),{id:doc.id})
+  })
+  yield put(ChatActions.messageListMerge(messageList))
+}
+
+export function * messageCreate (action) {
+  const { chatId, text } = action
+  const user = yield select(UserSelectors.getUser)
+  const collection = firebase.firestore().collection(chatCollection).doc(chatId).collection(messageCollection)
+  const docRef = yield call([collection, collection.add], 
+    {
+      text: text,
+      owner: user, 
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    }
+  )
+  const doc = yield call([docRef, docRef.get])
+  const newMessage = Object.assign(doc.data(),{id:doc.id})
+  yield put(ChatActions.messageListMerge([newMessage]))
+}
